@@ -9,7 +9,7 @@ export const ProductForm = () => {
     */
     const [product, update] = useState({
         name: "", 
-        type: " ",
+        //type: " ",
         price: " "
 
     })
@@ -18,8 +18,7 @@ export const ProductForm = () => {
         the user to the product list
     */
     const navigate = useNavigate()
-    const localKandyUser = localStorage.getItem("kandy_user")
-    const kandyUserObject = JSON.parse(localKandyUser)
+
     
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
@@ -28,10 +27,10 @@ export const ProductForm = () => {
        //primary key, id, is set by server
         productId: product.id,
         name: product.name,
-        type: productType.type,
+        //type: product.productType.type,
         price: product.price
     }
-return fetch(`http://localhost:8088/products?_expand=productType`, { //send the user submitted data
+return fetch(`http://localhost:8088/products`, { //send the user submitted data
    method: "POST", 
    headers: {
     "Content-Type": "application/json"
@@ -39,9 +38,9 @@ return fetch(`http://localhost:8088/products?_expand=productType`, { //send the 
    body: JSON.stringify(productToSendToAPI)
 
 })
-    .then (response => response.json()) //send the user back to the ticket list
+    .then (response => response.json()) 
     .then(( )=>  {
-        navigate("/products") //ticket list
+        navigate("/products") //go to all products
     
 })
     }
@@ -51,7 +50,7 @@ return fetch(`http://localhost:8088/products?_expand=productType`, { //send the 
             <h2 className="productForm__title">Update Product Inventory</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="description">name:</label>
+                    <label htmlFor="name">name:</label>
                     <input
                         required autoFocus
                         type="text"
@@ -67,7 +66,7 @@ return fetch(`http://localhost:8088/products?_expand=productType`, { //send the 
                     }/>
                 </div>
                 </fieldset>
-               <fieldset>
+           {  /*  <fieldset> 
                 <div className="form-group">
                     <label htmlFor="description">Type:</label>
                     <input
@@ -75,16 +74,16 @@ return fetch(`http://localhost:8088/products?_expand=productType`, { //send the 
                         type="text"
                         className="form-control"
                         placeholder="treat catagory"
-                        value={productType.type}
+                        value={product.productType.type}
                         onChange={ 
                             (event) => {
-                            const copy = {...productType} //make a copy of the product
+                            const copy = {...product.productType} //make a copy of the product
                             copy.name = event.target.value //look at the state of the productType, type
                             update(copy)
                         } 
                     }/>
                 </div>
-                </fieldset>
+                </fieldset>*/}
                <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Price:</label>

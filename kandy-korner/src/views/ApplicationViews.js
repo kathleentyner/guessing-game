@@ -17,7 +17,7 @@ export const ApplicationViews = () => {
 
                 <Route path="locations" element={ <LocationList /> } />
                 <Route path="products" element={ <ProductList /> } />
-                <Route path="productForm" element={ <ProductForm/>} />
+                <Route path="inventory/create" element={ <ProductForm />} />
 
           
 
